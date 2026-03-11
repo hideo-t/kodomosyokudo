@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ふくしまこども食堂 | ただいま、おかえり</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fef8f0;
+    --warm-white: #fffdf9;
+    --orange: #e8864a;
+    --orange-light: #f4a96a;
+    --orange-pale: #fde8d4;
+    --brown: #6b3f1e;
+    --brown-light: #9b6647;
+    --green: #5a8a5a;
+    --green-light: #8ab88a;
+    --green-pale: #e8f2e8;
+    --teal: #3d8c8c;
+    --teal-pale: #dff0f0;
+    --text: #3d2b1a;
+    --text-light: #7a5c42;
+    --shadow: rgba(107,63,30,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(160deg, #fde8c8 0%, #fff5e8 40%, #e8f5e8 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 10% 80%, rgba(232,134,74,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 90% 20%, rgba(90,138,90,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 0%, transparent 70%);
+  }
+
+  .steam {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .steam-line {
+    position: absolute;
+    bottom: 40%;
+    width: 3px;
+    height: 40px;
+    border-radius: 50px;
+    background: linear-gradient(to top, transparent, rgba(232,134,74,0.3));
+    animation: rise 3s ease-in-out infinite;
+    opacity: 0;
+  }
+  .steam-line:nth-child(1) { left: 42%; animation-delay: 0s; }
+  .steam-line:nth-child(2) { left: 48%; animation-delay: 0.8s; height: 55px; }
+  .steam-line:nth-child(3) { left: 54%; animation-delay: 1.5s; height: 35px; }
+  @keyframes rise {
+    0% { opacity: 0; transform: translateY(0) scaleX(1); }
+    30% { opacity: 0.8; }
+    100% { opacity: 0; transform: translateY(-80px) scaleX(1.5); }
+  }
+
+  .hero-bowl {
+    font-size: 72px;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    color: var(--brown);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    line-height: 1.3;
+    letter-spacing: 0.05em;
+  }
+  .hero-title .accent { color: var(--orange); }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--brown-light);
+    margin-top: 12px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-badge {
+    margin-top: 24px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .badge {
+    background: rgba(255,255,255,0.85);
+    border: 1.5px solid var(--orange-light);
+    color: var(--brown);
+    padding: 6px 18px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(254,248,240,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1.5px solid var(--orange-pale);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .nav-logo {
+    font-weight: 900;
+    font-size: 1.05rem;
+    color: var(--brown);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+  }
+  .nav-tab {
+    padding: 7px 16px;
+    border-radius: 100px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-light);
+    transition: all 0.2s;
+  }
+  .nav-tab.active, .nav-tab:hover {
+    background: var(--orange);
+    color: white;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .section {
+    padding: 48px 0 32px;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--brown);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--orange-pale), transparent);
+    border-radius: 2px;
+  }
+
+  /* ===== AREA FILTER ===== */
+  .area-filter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .area-btn {
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    background: white;
+    color: var(--text-light);
+    border-color: rgba(107,63,30,0.15);
+  }
+  .area-btn:hover { border-color: var(--orange); color: var(--orange); }
+  .area-btn.active { background: var(--orange); color: white; border-color: var(--orange); }
+  .area-btn[data-area="福島"] { }
+  .area-btn[data-area="県中"] { background: white; }
+
+  /* ===== CARDS GRID ===== */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--warm-white);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 2px 12px var(--shadow);
+    border: 1.5px solid rgba(255,255,255,0.8);
+    transition: all 0.25s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--orange-light), var(--orange));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px var(--shadow);
+  }
+  .card:hover::before { transform: scaleX(1); }
+
+  .card.area-福島市 { --card-accent: var(--orange); }
+  .card.area-県中 { --card-accent: var(--teal); }
+  .card.area-県南 { --card-accent: var(--green); }
+  .card.area-二本松 { --card-accent: #9b6647; }
+
+  .card-area {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+    background: var(--orange-pale);
+    color: var(--orange);
+  }
+  .card.area-県中 .card-area { background: var(--teal-pale); color: var(--teal); }
+  .card.area-県南 .card-area { background: var(--green-pale); color: var(--green); }
+  .card.area-二本松 .card-area { background: #f5ebe0; color: #9b6647; }
+
+  .card-name {
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: var(--brown);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .card-info {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+  .card-info span { display: flex; align-items: flex-start; gap: 6px; }
+  .card-info .icon { flex-shrink: 0; margin-top: 2px; }
+
+  .card-reserve-btn {
+    margin-top: 16px;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, var(--orange-light), var(--orange));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .card-reserve-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 14px rgba(232,134,74,0.4);
+  }
+  .card.area-県中 .card-reserve-btn { background: linear-gradient(135deg, #5ab5b5, var(--teal)); }
+  .card.area-県南 .card-reserve-btn { background: linear-gradient(135deg, var(--green-light), var(--green)); }
+  .card.area-二本松 .card-reserve-btn { background: linear-gradient(135deg, #c4956a, #9b6647); }
+
+  /* ===== HIDDEN CARDS ===== */
+  .card.hidden { display: none; }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(61,43,26,0.55);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--warm-white);
+    border-radius: 28px;
+    max-width: 480px;
+    width: 100%;
+    padding: 36px 32px;
+    box-shadow: 0 24px 80px rgba(61,43,26,0.25);
+    position: relative;
+    animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes popIn {
+    from { transform: scale(0.85) translateY(20px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--orange-pale);
+    color: var(--orange);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-family: inherit;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: var(--orange); color: white; }
+
+  .modal-title {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--brown);
+    margin-bottom: 4px;
+  }
+  .modal-shop {
+    font-size: 0.9rem;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+  .form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--brown);
+    margin-bottom: 7px;
+  }
+  .form-label .req {
+    color: var(--orange);
+    margin-left: 4px;
+    font-size: 0.75rem;
+  }
+  .form-input, .form-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid rgba(107,63,30,0.15);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-input:focus, .form-select:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(232,134,74,0.12);
+  }
+
+  .people-picker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .people-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--orange-light);
+    background: white;
+    color: var(--orange);
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .people-btn:hover { background: var(--orange); color: white; border-color: var(--orange); }
+  .people-count {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--brown);
+    min-width: 40px;
+    text-align: center;
+  }
+  .people-unit { font-size: 0.9rem; color: var(--text-light); font-weight: 700; }
+
+  .allergy-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .allergy-tag {
+    padding: 5px 14px;
+    border-radius: 100px;
+    border: 2px solid rgba(107,63,30,0.15);
+    background: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .allergy-tag.selected {
+    background: var(--orange-pale);
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+
+  .message-box {
+    background: var(--orange-pale);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 0.82rem;
+    color: var(--brown-light);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    border-left: 3px solid var(--orange-light);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--orange-light), var(--orange));
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(232,134,74,0.3);
+  }
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232,134,74,0.4);
+  }
+
+  /* ===== SUCCESS ===== */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 16px 0;
+  }
+  .success-screen.show { display: block; }
+  .success-icon { font-size: 64px; margin-bottom: 16px; animation: bounceIn 0.5s; }
+  @keyframes bounceIn {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  .success-title { font-size: 1.4rem; font-weight: 900; color: var(--brown); margin-bottom: 8px; }
+  .success-msg { font-size: 0.9rem; color: var(--text-light); line-height: 1.8; }
+  .success-back {
+    margin-top: 24px;
+    padding: 12px 32px;
+    background: var(--orange-pale);
+    color: var(--orange);
+    border: 2px solid var(--orange-light);
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* ===== INFO BANNER ===== */
+  .info-banner {
+    background: linear-gradient(135deg, var(--green-pale), #f0faf0);
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin: 32px 0;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    border: 1.5px solid rgba(90,138,90,0.2);
+  }
+  .info-icon { font-size: 2rem; flex-shrink: 0; }
+  .info-text h3 { font-size: 1rem; font-weight: 900; color: var(--green); margin-bottom: 6px; }
+  .info-text p { font-size: 0.85rem; color: #4a7a4a; line-height: 1.8; }
+
+  /* ===== SCHEDULE VIEW ===== */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    background: var(--orange-pale);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .day-header {
+    background: var(--orange);
+    color: white;
+    text-align: center;
+    padding: 10px 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .day-cell {
+    background: white;
+    min-height: 80px;
+    padding: 6px;
+    font-size: 0.75rem;
+  }
+  .day-num { font-weight: 700; color: var(--text-light); margin-bottom: 4px; font-size: 0.8rem; }
+  .day-event {
+    background: var(--orange-pale);
+    color: var(--orange);
+    border-radius: 4px;
+    padding: 2px 5px;
+    margin-bottom: 2px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .day-event:hover { background: var(--orange); color: white; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--brown);
+    color: rgba(255,255,255,0.7);
+    padding: 40px 20px;
+    margin-top: 64px;
+    text-align: center;
+  }
+  footer .footer-title { color: white; font-size: 1.1rem; font-weight: 900; margin-bottom: 8px; }
+  footer p { font-size: 0.82rem; line-height: 1.8; }
+  footer a { color: var(--orange-light); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .nav-tabs { gap: 2px; }
+    .nav-tab { padding: 6px 10px; font-size: 0.8rem; }
+    .modal { padding: 28px 20px; }
+    .schedule-grid { font-size: 0.65rem; }
+  }
+
+  /* Page sections visibility */
+  .page { display: none; }
+  .page.active { display: block; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="steam">
+    <div class="steam-line"></div>
+    <div class="steam-line"></div>
+    <div class="steam-line"></div>
+  </div>
+  <div class="hero-bowl">🍲</div>
+  <h1 class="hero-title">
+    ただいま、<span class="accent">おかえり</span>。<br>
+    ふくしまこども食堂
+  </h1>
+  <p class="hero-sub">予約なしでもOK。でも、来ると伝えてくれたらもっとうれしい。</p>
+  <div class="hero-badge">
+    <span class="badge">🌸 誰でも来ていい</span>
+    <span class="badge">🏠 遠慮しなくていい</span>
+    <span class="badge">🍚 温かいご飯がある</span>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">🍲 ふくしまこども食堂</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('list')">食堂を探す</button>
+    <button class="nav-tab" onclick="showPage('calendar')">日程を見る</button>
+    <button class="nav-tab" onclick="showPage('about')">はじめての方へ</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="container">
+
+  <!-- PAGE: LIST -->
+  <div id="page-list" class="page active">
+    <section class="section">
+      <div class="section-title">🗺️ エリアから探す</div>
+      <div class="area-filter">
+        <button class="area-btn active" data-area="all" onclick="filterArea('all', this)">すべて</button>
+        <button class="area-btn" data-area="福島市" onclick="filterArea('福島市', this)">福島市・伊達</button>
+        <button class="area-btn" data-area="二本松" onclick="filterArea('二本松', this)">二本松・本宮</button>
+        <button class="area-btn" data-area="県中" onclick="filterArea('県中', this)">県中（郡山・須賀川）</button>
+        <button class="area-btn" data-area="県南" onclick="filterArea('県南', this)">県南（白河）</button>
+      </div>
+
+      <div class="cards-grid" id="cards-grid">
+        <!-- 福島市エリア -->
+        <div class="card area-福島市" data-area="福島市">
+          <div class="card-area">福島市</div>
+          <div class="card-name">コミュニティフリッジひまわり</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 福島市山下町</span>
+            <span><span class="icon">📅</span> 毎週木・金曜日　長期休暇は毎日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('コミュニティフリッジひまわり', '福島市山下町', '毎週木・金曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-福島市" data-area="福島市">
+          <div class="card-area">福島市</div>
+          <div class="card-name">大町寄り添いスペースこども食堂</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 福島市大町</span>
+            <span><span class="icon">📅</span> 毎週土曜日午後1時〜4時</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('大町寄り添いスペースこども食堂', '福島市大町', '毎週土曜日 13:00〜16:00')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-福島市" data-area="福島市">
+          <div class="card-area">福島市・飯坂</div>
+          <div class="card-name">いいざか子ども食堂 いっしょに</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 福島市飯坂町</span>
+            <span><span class="icon">📅</span> 毎月第1土曜日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('いいざか子ども食堂 いっしょに', '福島市飯坂町', '毎月第1土曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-福島市" data-area="福島市">
+          <div class="card-area">福島市</div>
+          <div class="card-name">とことこまなびぃ</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 福島市五老内町</span>
+            <span><span class="icon">📅</span> 毎月1回 原則最終週の土日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('とことこまなびぃ', '福島市五老内町', '毎月1回 最終週土日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-福島市" data-area="福島市">
+          <div class="card-area">福島市</div>
+          <div class="card-name">鳥川ちいき子どもスペース とりかわバァちゃんち</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 福島市上鳥渡・下鳥渡・成川</span>
+            <span><span class="icon">📅</span> 毎月第3水曜日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('鳥川ちいき子どもスペース とりかわバァちゃんち', '福島市鳥渡地区', '毎月第3水曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-福島市" data-area="福島市">
+          <div class="card-area">伊達市</div>
+          <div class="card-name">子ども食堂「おばちゃんち」</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 伊達市梁川町</span>
+            <span><span class="icon">📅</span> 毎月第4土曜日（12月は第3土曜日）</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('子ども食堂「おばちゃんち」', '伊達市梁川町', '毎月第4土曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-福島市" data-area="福島市">
+          <div class="card-area">伊達市</div>
+          <div class="card-name">子ども食堂 おいでよ！</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 伊達市霊山町</span>
+            <span><span class="icon">📅</span> 毎月最後の土曜日（月によって変更あり）</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('子ども食堂 おいでよ！', '伊達市霊山町', '毎月最後の土曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <!-- 二本松・本宮エリア -->
+        <div class="card area-二本松" data-area="二本松">
+          <div class="card-area">二本松・本宮</div>
+          <div class="card-name">二本松こども食堂ハラクッチー</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 二本松市</span>
+            <span><span class="icon">📅</span> 毎月2回 日曜日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('二本松こども食堂ハラクッチー', '二本松市', '毎月2回 日曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-二本松" data-area="二本松">
+          <div class="card-area">二本松市</div>
+          <div class="card-name">二本松市まゆみこども食堂</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 二本松市</span>
+            <span><span class="icon">📅</span> 月〜金（祝日除く）11:30〜12:30　月2回テイクアウト配食</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('二本松市まゆみこども食堂', '二本松市', '月〜金 11:30〜12:30')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-二本松" data-area="二本松">
+          <div class="card-area">本宮市</div>
+          <div class="card-name">こども食堂コスモス</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 本宮市本宮字下町</span>
+            <span><span class="icon">📅</span> 月2回 第2・第4金曜日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('こども食堂コスモス', '本宮市', '月2回 第2・第4金曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <!-- 県中エリア -->
+        <div class="card area-県中" data-area="県中">
+          <div class="card-area">郡山市</div>
+          <div class="card-name">わらりら</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 須賀川市大町</span>
+            <span><span class="icon">📅</span> 毎週水曜日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('わらりら', '須賀川市大町', '毎週水曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-県中" data-area="県中">
+          <div class="card-area">郡山市</div>
+          <div class="card-name">つばさ会子ども食堂</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 郡山市得大槻町ほか</span>
+            <span><span class="icon">📅</span> 毎週木・火曜日（祝日・年末年始除く）</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('つばさ会子ども食堂', '郡山市', '毎週木・火曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-県中" data-area="県中">
+          <div class="card-area">郡山市</div>
+          <div class="card-name">おむすび食堂</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 須賀川市広表</span>
+            <span><span class="icon">📅</span> 毎週木曜日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('おむすび食堂', '須賀川市広表', '毎週木曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-県中" data-area="県中">
+          <div class="card-area">郡山市</div>
+          <div class="card-name">キッチンさとう</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 郡山市中野</span>
+            <span><span class="icon">📅</span> 毎週金曜日（祝日を除く）</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('キッチンさとう', '郡山市中野', '毎週金曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <!-- 県南エリア -->
+        <div class="card area-県南" data-area="県南">
+          <div class="card-area">県南・白河</div>
+          <div class="card-name">Cafe monday子ども食堂</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 白河市明戸168</span>
+            <span><span class="icon">📅</span> 毎月第1・3・5週の水曜日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('Cafe monday子ども食堂', '白河市明戸', '毎月第1・3・5週の水曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-県南" data-area="県南">
+          <div class="card-area">白河市</div>
+          <div class="card-name">しらかわ新蔵こども食堂</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 白河市向新蔵13番地</span>
+            <span><span class="icon">📅</span> 毎月第4水曜日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('しらかわ新蔵こども食堂', '白河市向新蔵', '毎月第4水曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-県南" data-area="県南">
+          <div class="card-area">白河市</div>
+          <div class="card-name">みらい子ども食堂</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 白河市関川窪</span>
+            <span><span class="icon">📅</span> 毎月第四日曜日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('みらい子ども食堂', '白河市関川窪', '毎月第4日曜日')">🌻 来ることを伝える</button>
+        </div>
+
+        <div class="card area-県南" data-area="県南">
+          <div class="card-area">西郷村</div>
+          <div class="card-name">わくわく子ども食堂</div>
+          <div class="card-info">
+            <span><span class="icon">📍</span> 西郷村</span>
+            <span><span class="icon">📅</span> 毎月第三日曜日</span>
+          </div>
+          <button class="card-reserve-btn" onclick="openModal('わくわく子ども食堂', '西郷村', '毎月第3日曜日')">🌻 来ることを伝える</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="info-banner">
+      <div class="info-icon">💚</div>
+      <div class="info-text">
+        <h3>予約は「行くよ」と伝えるだけでOK</h3>
+        <p>「来ることを伝える」ボタンを押してもらうと、食堂側が食材の量を調整しやすくなります。<br>
+        当日のキャンセルも大丈夫。来られなくなったら、ぜひ教えてください。でも、来られなかったからといって、次回来るのをためらわないで。<br>
+        いつでも、ただいまと言いに来てください。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: CALENDAR -->
+  <div id="page-calendar" class="page">
+    <section class="section">
+      <div class="section-title">📅 3月の開催日程</div>
+
+      <div class="schedule-grid">
+        <div class="day-header">日</div>
+        <div class="day-header">月</div>
+        <div class="day-header">火</div>
+        <div class="day-header">水</div>
+        <div class="day-header">木</div>
+        <div class="day-header">金</div>
+        <div class="day-header">土</div>
+
+        <!-- Week 1: March starts on Saturday -->
+        <div class="day-cell"></div>
+        <div class="day-cell"></div>
+        <div class="day-cell"></div>
+        <div class="day-cell"></div>
+        <div class="day-cell">
+          <div class="day-num">6</div>
+          <div class="day-event" onclick="openModal('コミュニティフリッジひまわり', '福島市山下町', '毎週木曜日')">ひまわり</div>
+          <div class="day-event" onclick="openModal('つばさ会子ども食堂', '郡山市', '毎週木曜日')">つばさ会</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">7</div>
+          <div class="day-event" onclick="openModal('コミュニティフリッジひまわり', '福島市山下町', '毎週金曜日')">ひまわり</div>
+          <div class="day-event" onclick="openModal('キッチンさとう', '郡山市中野', '毎週金曜日')">キッチンさとう</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">8</div>
+          <div class="day-event" onclick="openModal('大町寄り添いスペースこども食堂', '福島市大町', '毎週土曜日')">大町寄り添い</div>
+          <div class="day-event" onclick="openModal('いいざか子ども食堂 いっしょに', '福島市飯坂町', '第1土曜日')">いいざか</div>
+        </div>
+
+        <div class="day-cell">
+          <div class="day-num">9</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">10</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">11</div>
+          <div class="day-event" onclick="openModal('つばさ会子ども食堂', '郡山市', '毎週火曜日')">つばさ会</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">12</div>
+          <div class="day-event" onclick="openModal('わらりら', '須賀川市大町', '毎週水曜日')">わらりら</div>
+          <div class="day-event" onclick="openModal('Cafe monday子ども食堂', '白河市明戸', '第3水曜日')">Cafe monday</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">13</div>
+          <div class="day-event" onclick="openModal('コミュニティフリッジひまわり', '福島市山下町', '毎週木曜日')">ひまわり</div>
+          <div class="day-event" onclick="openModal('おむすび食堂', '須賀川市広表', '毎週木曜日')">おむすび食堂</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">14</div>
+          <div class="day-event" onclick="openModal('コミュニティフリッジひまわり', '福島市山下町', '毎週金曜日')">ひまわり</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">15</div>
+          <div class="day-event" onclick="openModal('大町寄り添いスペースこども食堂', '福島市大町', '毎週土曜日')">大町寄り添い</div>
+          <div class="day-event" onclick="openModal('しらかわ新蔵こども食堂', '白河市向新蔵', '第3土曜日')">しらかわ新蔵</div>
+        </div>
+
+        <div class="day-cell">
+          <div class="day-num">16</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">17</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">18</div>
+          <div class="day-event" onclick="openModal('つばさ会子ども食堂', '郡山市', '毎週火曜日')">つばさ会</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">19</div>
+          <div class="day-event" onclick="openModal('わらりら', '須賀川市大町', '毎週水曜日')">わらりら</div>
+          <div class="day-event" onclick="openModal('鳥川ちいき子どもスペース', '福島市鳥渡', '第3水曜日')">鳥川</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">20</div>
+          <div class="day-event" onclick="openModal('コミュニティフリッジひまわり', '福島市山下町', '毎週木曜日')">ひまわり</div>
+          <div class="day-event" onclick="openModal('おむすび食堂', '須賀川市広表', '毎週木曜日')">おむすび食堂</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">21</div>
+          <div class="day-event" onclick="openModal('コミュニティフリッジひまわり', '福島市山下町', '毎週金曜日')">ひまわり</div>
+          <div class="day-event" onclick="openModal('キッチンさとう', '郡山市中野', '毎週金曜日')">キッチンさとう</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">22</div>
+          <div class="day-event" onclick="openModal('大町寄り添いスペースこども食堂', '福島市大町', '毎週土曜日')">大町寄り添い</div>
+          <div class="day-event" onclick="openModal('子ども食堂「おばちゃんち」', '伊達市梁川町', '第4土曜日')">おばちゃんち</div>
+        </div>
+
+        <div class="day-cell">
+          <div class="day-num">23</div>
+          <div class="day-event" onclick="openModal('みらい子ども食堂', '白河市関川窪', '第4日曜日')">みらい</div>
+          <div class="day-event" onclick="openModal('わくわく子ども食堂', '西郷村', '第3日曜日')">わくわく</div>
+        </div>
+        <div class="day-cell"><div class="day-num">24</div></div>
+        <div class="day-cell">
+          <div class="day-num">25</div>
+          <div class="day-event" onclick="openModal('つばさ会子ども食堂', '郡山市', '毎週火曜日')">つばさ会</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">26</div>
+          <div class="day-event" onclick="openModal('わらりら', '須賀川市大町', '毎週水曜日')">わらりら</div>
+          <div class="day-event" onclick="openModal('しらかわ新蔵こども食堂', '白河市向新蔵', '第4水曜日')">しらかわ新蔵</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">27</div>
+          <div class="day-event" onclick="openModal('コミュニティフリッジひまわり', '福島市山下町', '毎週木曜日')">ひまわり</div>
+          <div class="day-event" onclick="openModal('おむすび食堂', '須賀川市広表', '毎週木曜日')">おむすび食堂</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">28</div>
+          <div class="day-event" onclick="openModal('コミュニティフリッジひまわり', '福島市山下町', '毎週金曜日')">ひまわり</div>
+          <div class="day-event" onclick="openModal('二本松市まゆみこども食堂', '二本松市', '毎週金曜日')">まゆみ</div>
+        </div>
+        <div class="day-cell">
+          <div class="day-num">29</div>
+          <div class="day-event" onclick="openModal('大町寄り添いスペースこども食堂', '福島市大町', '毎週土曜日')">大町寄り添い</div>
+          <div class="day-event" onclick="openModal('とことこまなびぃ', '福島市五老内町', '最終週土日')">とことこ</div>
+        </div>
+
+        <div class="day-cell">
+          <div class="day-num">30</div>
+          <div class="day-event" onclick="openModal('とことこまなびぃ', '福島市五老内町', '最終週土日')">とことこ</div>
+          <div class="day-event" onclick="openModal('二本松こども食堂ハラクッチー', '二本松市', '毎月2回 日曜日')">ハラクッチー</div>
+        </div>
+        <div class="day-cell"><div class="day-num">31</div></div>
+        <div class="day-cell"></div>
+        <div class="day-cell"></div>
+        <div class="day-cell"></div>
+        <div class="day-cell"></div>
+        <div class="day-cell"></div>
+      </div>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; font-size:0.8rem; color:var(--text-light); margin-top:8px;">
+        <span>💡 日程をクリックするとその食堂に来ることを伝えられます</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE: ABOUT -->
+  <div id="page-about" class="page">
+    <section class="section">
+      <div class="section-title">🌸 はじめての方へ</div>
+
+      <div style="display:grid; gap:20px; max-width:680px;">
+        <div class="card" style="cursor:default;">
+          <div style="font-size:2rem;margin-bottom:12px;">🙋</div>
+          <div class="card-name">誰が来ていいの？</div>
+          <div class="card-info" style="font-size:0.9rem; color:var(--text);">
+            子どもも、大人も、おじいちゃんおばあちゃんも。<br>
+            「経済的に困っている」という理由がなくても来ていいんです。<br>
+            ただ、温かいご飯を誰かと一緒に食べたい。それだけで十分です。
+          </div>
+        </div>
+
+        <div class="card" style="cursor:default;">
+          <div style="font-size:2rem;margin-bottom:12px;">💰</div>
+          <div class="card-name">お金はかかるの？</div>
+          <div class="card-info" style="font-size:0.9rem; color:var(--text);">
+            食堂によって異なります。無料のところも、子ども無料・大人は少額のところも。<br>
+            払えない時は気にしないでください。食べに来ることのほうがずっと大切です。
+          </div>
+        </div>
+
+        <div class="card" style="cursor:default;">
+          <div style="font-size:2rem;margin-bottom:12px;">📱</div>
+          <div class="card-name">「来ることを伝える」って何？</div>
+          <div class="card-info" style="font-size:0.9rem; color:var(--text);">
+            予約ではありません。「今日行こうかな」と思ったら、ぽちっと押してください。<br>
+            食堂のスタッフが食材の量を準備しやすくなります。<br>
+            来られなくなっても大丈夫。次回また来てください。
+          </div>
+        </div>
+
+        <div class="card" style="cursor:default;">
+          <div style="font-size:2rem;margin-bottom:12px;">🤝</div>
+          <div class="card-name">ボランティアとして関わりたい</div>
+          <div class="card-info" style="font-size:0.9rem; color:var(--text);">
+            各食堂のSNSや連絡先からご連絡ください。<br>
+            食材の提供、調理のお手伝い、子どもたちとの交流など、関わり方はいろいろあります。
+          </div>
+        </div>
+      </div>
+
+      <div class="info-banner" style="margin-top:32px;">
+        <div class="info-icon">🌱</div>
+        <div class="info-text">
+          <h3>ふくしまのこども食堂ネットワークについて</h3>
+          <p>このサイトは、福島県内のこども食堂情報をまとめた非公式の案内サイトです。<br>
+          情報は <a href="https://fukukodoshoku.org" target="_blank">fukukodoshoku.org</a> をもとにしています。<br>
+          最新情報は各食堂のSNSでご確認ください。</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<!-- RESERVATION MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <!-- FORM -->
+    <div id="modal-form">
+      <div class="modal-title">🌻 来ることを伝える</div>
+      <div class="modal-shop" id="modal-shop-name"></div>
+
+      <div class="message-box">
+        これは予約ではありません。来ることを教えてくれると、食堂がご飯の量を準備しやすくなります。来られなくなっても大丈夫です。
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">日程<span class="req">✦</span></label>
+        <select class="form-select" id="visit-date">
+          <option value="">いつ来ますか？</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">来る人数<span class="req">✦</span></label>
+        <div class="people-picker">
+          <button class="people-btn" onclick="changePeople(-1)">－</button>
+          <div class="people-count" id="people-count">1</div>
+          <span class="people-unit">人</span>
+          <button class="people-btn" onclick="changePeople(1)">＋</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">お名前（ニックネームでもOK）</label>
+        <input type="text" class="form-input" id="visitor-name" placeholder="例：たかはし、秀夫くん、など">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">アレルギーなど（あれば）</label>
+        <div class="allergy-tags" id="allergy-tags">
+          <button class="allergy-tag" onclick="toggleAllergy(this)">卵</button>
+          <button class="allergy-tag" onclick="toggleAllergy(this)">乳製品</button>
+          <button class="allergy-tag" onclick="toggleAllergy(this)">小麦</button>
+          <button class="allergy-tag" onclick="toggleAllergy(this)">えび・かに</button>
+          <button class="allergy-tag" onclick="toggleAllergy(this)">ナッツ</button>
+          <button class="allergy-tag" onclick="toggleAllergy(this)">そば</button>
+        </div>
+      </div>
+
+      <button class="submit-btn" onclick="submitReservation()">
+        🍲 「行くよ」と伝える
+      </button>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="success-screen">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">伝わりました！</div>
+      <div class="success-msg" id="success-msg"></div>
+      <button class="success-back" onclick="closeModal()">食堂一覧に戻る</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-title">🍲 ふくしまこども食堂 案内サイト</div>
+  <p>
+    福島県内で活動するこども食堂の情報をまとめています<br>
+    情報元：<a href="https://fukukodoshoku.org/map" target="_blank">fukukodoshoku.org</a><br><br>
+    「温かいご飯と、ただいまと言える場所を、すべての人に」
+  </p>
+</footer>
+
+<script>
+  let currentShop = '';
+  let currentSchedule = '';
+  let peopleCount = 1;
+
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function filterArea(area, btn) {
+    document.querySelectorAll('.area-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card').forEach(card => {
+      if (area === 'all') {
+        card.classList.remove('hidden');
+      } else {
+        const cardArea = card.getAttribute('data-area');
+        if (cardArea === area) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      }
+    });
+  }
+
+  function openModal(name, location, schedule) {
+    currentShop = name;
+    currentSchedule = schedule;
+    document.getElementById('modal-shop-name').textContent = name + '｜' + location;
+    
+    // Populate dates
+    const select = document.getElementById('visit-date');
+    select.innerHTML = '<option value="">いつ来ますか？</option>';
+    const today = new Date();
+    for (let i = 0; i < 30; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() + i);
+      const label = d.toLocaleDateString('ja-JP', { month: 'long', day: 'numeric', weekday: 'short' });
+      const opt = document.createElement('option');
+      opt.value = label;
+      opt.textContent = label;
+      select.appendChild(opt);
+    }
+
+    // Reset
+    document.getElementById('modal-form').style.display = 'block';
+    document.getElementById('success-screen').classList.remove('show');
+    document.getElementById('visitor-name').value = '';
+    peopleCount = 1;
+    document.getElementById('people-count').textContent = '1';
+    document.querySelectorAll('.allergy-tag').forEach(t => t.classList.remove('selected'));
+
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  function changePeople(delta) {
+    peopleCount = Math.max(1, Math.min(10, peopleCount + delta));
+    document.getElementById('people-count').textContent = peopleCount;
+  }
+
+  function toggleAllergy(btn) {
+    btn.classList.toggle('selected');
+  }
+
+  function submitReservation() {
+    const date = document.getElementById('visit-date').value;
+    const name = document.getElementById('visitor-name').value || 'あなた';
+    const allergies = [...document.querySelectorAll('.allergy-tag.selected')].map(t => t.textContent);
+    
+    if (!date) {
+      document.getElementById('visit-date').focus();
+      document.getElementById('visit-date').style.borderColor = 'var(--orange)';
+      return;
+    }
+
+    document.getElementById('modal-form').style.display = 'none';
+    document.getElementById('success-screen').classList.add('show');
+    
+    let msg = `${name}さん、${peopleCount}名で${date}に「${currentShop}」に来ることが伝わりました。\n\n`;
+    msg += allergies.length > 0 ? `アレルギー情報（${allergies.join('・')}）も伝えました。\n\n` : '';
+    msg += '温かいご飯が待っています。気をつけてきてください。\n来られなくなっても大丈夫です。また次回も待っています。';
+    
+    document.getElementById('success-msg').textContent = msg;
+  }
+
+  // Smooth scroll for nav
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  });
+</script>
+
+</body>
+</html>
